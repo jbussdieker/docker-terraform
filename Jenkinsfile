@@ -1,12 +1,15 @@
 #!groovy
+latest = "0.12.0-rc1"
+stable = "0.11.13"
+
 properties([
   parameters([
-    string(defaultValue: '0.11.13', description: 'Terraform Version', name: 'TerraformVersion')
+    string(defaultValue: '0.11.13', description: 'Version', name: 'Version')
   ])
 ])
 
 node {
-  terraformVersion = params.TerraformVersion
+  terraformVersion = params.Version
   credentialsId = 'docker-hub-credentials'
 
   stage('clone') {
@@ -26,6 +29,10 @@ node {
   stage('publish') {
     docker.withRegistry("", credentialsId) {
       image.push()
+      if (terraformVersion == latest)
+        image.push('latest')
+      else if (terraformVersion == stable)
+        image.push('stable')
     }
   }
 }
