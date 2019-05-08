@@ -31,7 +31,7 @@ node {
       image.push()
       if (terraformVersion == latest)
         image.push('latest')
-      else if (terraformVersion == stable)
+      if (terraformVersion == stable)
         image.push('stable')
     }
   }
