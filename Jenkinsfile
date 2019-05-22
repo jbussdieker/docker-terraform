@@ -1,10 +1,10 @@
 #!groovy
 latest = "0.12.0-rc1"
-stable = "0.11.13"
+stable = "0.11.14"
 
 properties([
   parameters([
-    string(defaultValue: '0.11.13', description: 'Version', name: 'Version')
+    string(defaultValue: '0.11.14', description: 'Version', name: 'Version')
   ])
 ])
 
